@@ -1,11 +1,13 @@
 package com.deepak.dsk.speechtextspeech;
 
 import android.app.Activity;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,10 +23,12 @@ import java.util.List;
 public class MainActivity extends Activity {
 
     private TextView speechToText;
-    private Button recordBut;
-    private Button textToSpeechBut;
+    private ImageButton recordBut;
+    private ImageButton textToSpeechBut;
     private EditText textToSpeech;
     SpeechProgressView speechProgressView;
+    TypedArray typedArray;
+    int[] colors;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,19 +36,25 @@ public class MainActivity extends Activity {
         Speech.init(this, getPackageName());
 
 
+        typedArray=getResources().obtainTypedArray(R.array.colours);
+        colors=new int[typedArray.length()];
+        for(int i=0;i<typedArray.length();++i)
+            colors[i]=typedArray.getColor(i,0);
+
         speechToText=findViewById(R.id.convert_speech_text);
         recordBut=findViewById(R.id.record_speech);
         textToSpeechBut=findViewById(R.id.convert_text_speech_button);
         textToSpeech=findViewById(R.id.convert_text_speech);
 
         speechProgressView=findViewById(R.id.progress);
-
+        speechProgressView.setColors(colors);
 
         recordBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
 
+                recordBut.setColorFilter(getResources().getColor(R.color.colorAccent));
                 speechToText.setText("");
                 try {
                     // you must have android.permission.RECORD_AUDIO granted at this point
@@ -97,32 +107,6 @@ public class MainActivity extends Activity {
                                     Log.i("speech", "speech error");
                                 }
                             });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                         }
                     });
                 } catch (SpeechRecognitionNotAvailable exc) {
@@ -145,7 +129,9 @@ public class MainActivity extends Activity {
         textToSpeechBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                textToSpeechBut.setColorFilter(getResources().getColor(R.color.colorAccent));
                 String msg;
+
                 msg=textToSpeech.getText().toString();
                 if(msg.isEmpty())
                     msg="hey you have not enter any thing";
