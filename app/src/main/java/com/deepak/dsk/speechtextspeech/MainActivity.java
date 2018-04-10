@@ -23,8 +23,8 @@ import java.util.List;
 public class MainActivity extends Activity {
 
     private TextView speechToText;
-    private ImageButton recordBut;
-    private ImageButton textToSpeechBut;
+    private Button recordBut;
+    private Button textToSpeechBut;
     private EditText textToSpeech;
     SpeechProgressView speechProgressView;
     TypedArray typedArray;
@@ -54,7 +54,9 @@ public class MainActivity extends Activity {
             public void onClick(View view) {
 
 
-                recordBut.setColorFilter(getResources().getColor(R.color.colorAccent));
+                recordBut.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                recordBut.setTextColor(getResources().getColor(R.color.white));
+
                 speechToText.setText("");
                 try {
                     // you must have android.permission.RECORD_AUDIO granted at this point
@@ -91,6 +93,8 @@ public class MainActivity extends Activity {
                             else
                                 msg="you said "+result;
 
+                            recordBut.setBackgroundColor(getResources().getColor(R.color.grey));
+                            recordBut.setTextColor(getResources().getColor(R.color.black));
                             Speech.getInstance().say(msg, new TextToSpeechCallback() {
                                 @Override
                                 public void onStart() {
@@ -129,9 +133,10 @@ public class MainActivity extends Activity {
         textToSpeechBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                textToSpeechBut.setColorFilter(getResources().getColor(R.color.colorAccent));
                 String msg;
 
+                textToSpeechBut.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                textToSpeechBut.setTextColor(getResources().getColor(R.color.white));
                 msg=textToSpeech.getText().toString();
                 if(msg.isEmpty())
                     msg="hey you have not enter any thing";
@@ -145,6 +150,8 @@ public class MainActivity extends Activity {
                     @Override
                     public void onCompleted() {
                         Log.i("speech", "speech completed");
+                        textToSpeechBut.setBackgroundColor(getResources().getColor(R.color.grey));
+                        textToSpeechBut.setTextColor(getResources().getColor(R.color.black));
                     }
 
                     @Override

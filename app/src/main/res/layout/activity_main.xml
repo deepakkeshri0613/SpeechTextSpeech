@@ -36,13 +36,17 @@
     <Space
         android:layout_width="match_parent"
         android:layout_height="50dp" />
-   <ImageButton
+   <Button
        android:id="@+id/record_speech"
-       android:layout_width="120dp"
-       android:layout_height="60dp"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
        android:text="RECORD_SPEECH"
-       android:src="@drawable/mic"
-       android:layout_gravity="center"/>
+       android:background="@color/grey"
+       android:textColor="@color/black"
+       android:layout_marginLeft="16dp"
+       android:layout_marginRight="16dp"
+       android:drawableLeft="@drawable/mic"
+       />
 
     <Space
         android:layout_width="match_parent"
@@ -52,12 +56,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter the text to convert Speech"/>
-    <ImageButton
+    <Button
+        android:layout_marginTop="20dp"
         android:id="@+id/convert_text_speech_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Convert"
+        android:text="CONVERT_TEXT"
+        android:paddingRight="12dp"
+        android:paddingLeft="12dp"
         android:layout_gravity="center"
-        android:src="@drawable/speaker"
+        android:background="@color/grey"
+        android:textColor="@color/black"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:drawableLeft="@drawable/speaker"
         />
 </LinearLayout>
